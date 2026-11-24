@@ -1,1 +1,65 @@
-
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+:root{font-family:'DM Sans',sans-serif;color:#f4f1fa;background:#09090f;font-synthesis:none}
+*{box-sizing:border-box}
+body{margin:0;min-width:320px;background:radial-gradient(ellipse at 50% 0%,#211631 0%,#0d0b15 42%,#09090f 78%);min-height:100vh}
+button,input{font:inherit}
+.shell{max-width:1160px;margin:auto;padding:0 28px}
+.topbar{height:82px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #ffffff12}
+.brand{font:700 17px 'Space Grotesk';letter-spacing:2px;color:#fff;text-decoration:none}
+.brand b{color:#b99aff}
+.moon{font-size:25px;color:#c8aaff;margin-right:9px;vertical-align:-2px}
+.live-label,.room-status{font-size:11px;letter-spacing:1.5px;color:#bdb5ca;display:flex;align-items:center;gap:9px}
+.live-label i,.room-status i{width:7px;height:7px;border-radius:50%;background:#8fdbb1;box-shadow:0 0 12px #8fdbb1}
+.hero{text-align:center;padding:82px 0 70px}
+.eyebrow{font-size:10px;letter-spacing:3px;color:#b69adf;font-weight:700}
+h1,h2{font-family:'Space Grotesk',sans-serif}
+h1{font-size:clamp(44px,7vw,76px);line-height:1.02;letter-spacing:-4px;margin:22px 0 16px}
+h1 span{color:#bb9bff}
+.sub{color:#a9a2b5;font-size:15px;margin:0 auto 34px;max-width:470px;line-height:1.7}
+.join-card{width:min(100%,390px);margin:auto;text-align:left;padding:25px;border:1px solid #ffffff18;border-radius:18px;background:#14111eeb;box-shadow:0 20px 80px #0007}
+label{display:block;font-size:9px;font-weight:700;letter-spacing:1.6px;color:#a99cb9;margin:0 0 9px}
+input{width:100%;border:1px solid #ffffff1c;background:#0c0b12;color:#fff;border-radius:9px;padding:13px 14px;outline:none;margin-bottom:17px}
+input:focus{border-color:#a987e8}
+input::placeholder{color:#655e70}
+.primary{width:100%;border:0;border-radius:9px;padding:14px;background:linear-gradient(100deg,#a47de9,#7656c5);color:#fff;font-weight:700;cursor:pointer}
+.primary:disabled{opacity:.6;cursor:wait}
+.primary span{float:right}
+.hint{font-size:11px;color:#827a8d;line-height:1.5;margin:12px 0 0}
+.error{color:#ff9d9d;font-size:12px;margin-top:10px;min-height:16px}
+.feature-row{display:flex;justify-content:center;gap:55px;margin-top:46px}
+.feature-row div{display:flex;flex-direction:column;gap:6px}
+.feature-row strong{font:600 13px 'Space Grotesk';color:#b99aff}
+.feature-row span{font-size:11px;color:#888194}
+.hidden{display:none!important}
+.room-view{padding:50px 0 65px}
+.room-heading{display:flex;justify-content:space-between;align-items:center;margin-bottom:25px}
+h2{font-size:32px;margin:8px 0;color:#fff}
+.room-status{letter-spacing:.3px;font-size:12px}
+.ghost{background:transparent;border:1px solid #ffffff35;color:#ddd4eb;padding:10px 15px;border-radius:9px;cursor:pointer}
+.room-grid{display:grid;grid-template-columns:1fr 1.15fr;gap:18px}
+.panel{border:1px solid #ffffff18;border-radius:16px;background:#14111eea;min-height:390px;padding:20px}
+.panel-title{font-size:10px;letter-spacing:1.8px;color:#b9adc9;font-weight:700;display:flex;justify-content:space-between;align-items:center;padding-bottom:17px;border-bottom:1px solid #ffffff12}
+.count{background:#302440;color:#cdb8f7;padding:4px 9px;border-radius:20px}
+.people-list{padding:8px 0;min-height:215px}
+.person{display:flex;align-items:center;gap:12px;padding:11px 2px;border-bottom:1px solid #ffffff0a}
+.avatar{width:37px;height:37px;border-radius:12px;display:grid;place-items:center;background:linear-gradient(140deg,#7251a6,#312344);font-weight:700}
+.person-info{display:flex;flex-direction:column;gap:4px;flex:1}
+.person-info strong{font-size:13px}.person-info small{font-size:10px;color:#898195}
+.mic-state{font-size:13px}
+.mic-controls{border-top:1px solid #ffffff12;padding-top:15px}
+.mic-button{width:100%;border:1px solid #a988e9;background:#261d36;color:#d7c5ff;padding:12px;border-radius:9px;font-weight:700;cursor:pointer}
+.mic-button.enabled{background:#563b80;color:white}
+.chat-lock{font-size:9px;color:#8fdbb1;letter-spacing:1px}
+.messages{height:280px;overflow:auto;padding:15px 2px}
+.empty-chat{text-align:center;color:#81788e;padding-top:100px;font-size:13px}
+.message{margin-bottom:15px}
+.message div{display:flex;align-items:center;gap:9px}
+.message strong{font-size:12px;color:#c9b1fa}.message time{font-size:9px;color:#756d80}
+.message p{font-size:13px;color:#e0dbe8;margin:5px 0 0;line-height:1.5;overflow-wrap:anywhere}
+.chat-form{display:flex;gap:8px;border-top:1px solid #ffffff12;padding-top:14px}
+.chat-form input{margin:0;flex:1}
+.chat-form button{width:45px;border:0;border-radius:9px;background:#8f6bd0;color:white;cursor:pointer;font-size:17px}
+.safety-note{font-size:11px;color:#81798a;line-height:1.6;margin:18px 2px}
+footer{text-align:center;padding:22px 0 30px;border-top:1px solid #ffffff10;color:#625b6c;font-size:9px;letter-spacing:2px}
+footer span{color:#b99aff;margin:0 7px}
+@media(max-width:700px){.shell{padding:0 16px}.hero{padding:60px 0 50px}h1{letter-spacing:-2px}.feature-row{gap:24px}.room-grid{grid-template-columns:1fr}.room-heading{align-items:flex-start;gap:15px}.room-heading h2{font-size:25px}.panel{min-height:auto}.people-list{min-height:100px}.messages{height:230px}}
