@@ -1,60 +1,13 @@
 <!doctype html>
 <html lang="en">
-<head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Midnight World</title>
-<style>
-:root{--bg:#090911;--panel:#141421;--line:#29283b;--muted:#9694aa;--purple:#9654d4;--pink:#c08cf5}
-*{box-sizing:border-box}body{margin:0;background:var(--bg);color:#f7f4ff;font:15px Inter,system-ui,Arial,sans-serif}
-header{height:68px;padding:0 5%;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--line);background:#10101a;position:sticky;top:0;z-index:2}
-.brand{font-weight:850;letter-spacing:1px}.brand span{color:var(--pink)}.logo{display:inline-grid;place-items:center;width:37px;height:37px;border-radius:11px;background:linear-gradient(135deg,#a85bea,#5631a6);margin-right:10px}
-.wrap{display:grid;grid-template-columns:205px 1fr;min-height:calc(100vh - 68px)}aside{padding:22px 14px;border-right:1px solid var(--line)}main{padding:28px;max-width:1250px;width:100%;margin:auto}
-button{border:0;cursor:pointer;color:inherit;font:inherit}.nav{display:block;text-align:left;width:100%;padding:12px;border-radius:9px;background:none;color:#aaa8bd;margin:3px 0}.nav.active,.nav:hover{background:#29203d;color:#dfc3ff}
-.hero{padding:35px;border:1px solid #47305e;border-radius:18px;background:linear-gradient(120deg,#291d40,#181a2d);margin-bottom:22px}.hero h1{font-size:clamp(25px,4vw,39px);margin:12px 0}.muted{color:var(--muted)}.btn{background:linear-gradient(120deg,#8b45d6,#6332b3);padding:10px 15px;border-radius:9px;font-weight:700}.alt{background:#242237;border:1px solid #38334c;padding:9px 13px;border-radius:9px}
-.stats,.cards{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:13px;margin:18px 0}.stat,.room,.panel{background:var(--panel);border:1px solid var(--line);border-radius:13px;padding:15px}.stat b{display:block;font-size:22px;margin-top:5px}.cards{grid-template-columns:repeat(2,minmax(0,1fr))}.room{padding:0;overflow:hidden}.roomtop{padding:18px;background:linear-gradient(120deg,#251b39,#171a2c)}.roomtop .emoji{font-size:32px}.roombottom{display:flex;align-items:center;justify-content:space-between;padding:13px}.tag{font-size:10px;padding:5px 8px;background:#29203e;color:#d6b4ff;border-radius:6px}
-.page{display:none}.page.active{display:block}.avatar{display:inline-grid;place-items:center;width:38px;height:38px;border-radius:50%;background:linear-gradient(135deg,#7546a8,#292d56);font-size:20px}
-input,select{width:100%;padding:11px;border:1px solid #39364c;background:#1c1b2b;color:white;border-radius:8px;margin:8px 0 14px}
-.modal{display:none;position:fixed;inset:0;background:#000b;z-index:5;align-items:center;justify-content:center;padding:16px}.modal.show{display:flex}.modal .panel{width:min(420px,100%)}
-.seats{display:flex;justify-content:center;gap:28px;flex-wrap:wrap;margin:25px}
-.giftgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.gift{background:#201e30;padding:16px 5px;border-radius:10px;text-align:center}
-.mobile{display:none}#toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:#39284f;border:1px solid #8156a3;padding:12px 18px;border-radius:10px;display:none;z-index:9}
-@media(max-width:700px){.wrap{display:block}aside{display:none}main{padding:16px}.stats{grid-template-columns:repeat(2,1fr)}.cards{grid-template-columns:1fr}.mobile{display:flex;justify-content:space-around;position:sticky;bottom:0;background:#141321;border-top:1px solid var(--line);padding:9px}.mobile button{background:none;font-size:12px}.hero{padding:24px}}
-</style>
-</head>
-<body>
-<header><div><span class="logo">🌙</span><span class="brand">MIDNIGHT <span>WORLD</span></span></div><div class="muted">🪙 <b id="coins">2,500</b> coins</div></header>
-<div class="wrap"><aside><p class="muted">MENU</p><button class="nav active" data-page="home">⌂ &nbsp; Discover</button><button class="nav" data-page="rooms">🎙 &nbsp; Voice Rooms</button><button class="nav" data-page="messages">✉ &nbsp; Messages</button><button class="nav" data-page="ranking">🏆 &nbsp; Leaderboard</button><button class="nav" data-page="gifts">🎁 &nbsp; Gift Center</button><button class="nav" data-page="profile">👤 &nbsp; My Profile</button><div class="panel" style="margin-top:25px"><b>✨ Welcome!</b><p class="muted">Meet people, join conversations and make memories.</p></div></aside>
-<main>
-<section class="page active" id="home"><div class="hero"><span class="tag">✦ YOUR WORLD, YOUR PEOPLE</span><h1>Welcome to <span style="color:var(--pink)">Midnight World.</span></h1><p class="muted">Find your people. Join a conversation. Make memories.</p><button class="btn" data-go="rooms">Explore rooms →</button> <button class="alt" id="createOpen">＋ Create a room</button></div>
-<div class="stats"><div class="stat muted">Live rooms<b id="count">4</b></div><div class="stat muted">Online now<b>128</b></div><div class="stat muted">My level<b>12</b></div><div class="stat muted">My coins<b id="coinStat">2.5K</b></div></div><h2>🔥 Trending rooms</h2><div class="cards" id="homeRooms"></div></section>
-<section class="page" id="rooms"><h1>Voice Rooms</h1><p class="muted">Find a room and join the conversation.</p><button class="btn" id="createOpen2">＋ Create room</button><input id="search" placeholder="Search rooms..."><div id="roomList" class="cards"></div></section>
-<section class="page" id="messages"><h1>Messages</h1><div class="panel">🌸 <b>Luna</b><p class="muted">Hey! Welcome to Midnight World ✨</p></div><br><div class="panel">🦊 <b>Alex</b><p class="muted">See you in the music room!</p></div><p class="muted">Demo conversations. Real messaging requires a connected backend.</p></section>
-<section class="page" id="ranking"><h1>🏆 Leaderboard</h1><div id="ranks" class="panel"></div></section>
-<section class="page" id="gifts"><h1>🎁 Gift Center</h1><p class="muted">Send virtual gifts with demo coins.</p><div class="panel">Balance: 🪙 <b id="giftCoins">2,500</b></div><div class="giftgrid" id="giftGrid" style="margin-top:14px"></div><p class="muted">Demo coins have no monetary value.</p></section>
-<section class="page" id="profile"><div class="panel"><div style="font-size:55px">😎</div><h2 id="profileName">Midnight User</h2><p class="muted">ID: MW-00001 · Level 12</p><p id="bio">Living life one conversation at a time. 🌙</p><button class="alt" id="editOpen">Edit profile</button><div class="stats"><div class="stat">12<b>Level</b></div><div class="stat">245<b>Followers</b></div><div class="stat">89<b>Following</b></div></div><span class="tag">🌟 Newcomer</span> <span class="tag">🎙 Speaker</span></div></section>
-<section class="page" id="room"><button class="alt" data-go="rooms">← Back to rooms</button><div class="panel" style="margin-top:15px;text-align:center"><span class="tag">🔴 LIVE DEMO ROOM</span><div style="font-size:55px;margin:22px" id="roomEmoji">🎵</div><h1 id="roomTitle">Midnight Music</h1><p class="muted" id="host">Hosted by Luna</p><div class="seats"><div><span class="avatar">🌸</span><p>Luna</p></div><div><span class="avatar">🦊</span><p>Alex</p></div><div><span class="avatar">😎</span><p>You</p></div></div><div class="panel" style="text-align:left"><b>Room chat</b><div id="chatLog" class="muted" style="margin:12px 0">Luna: Welcome everyone! ✨</div><input id="chatInput" placeholder="Say something..."><button class="btn" id="send">Send</button></div><br><button class="alt" id="mic">🎙 Mic off</button> <button class="alt" id="like">💜 Like</button> <button class="btn" data-go="rooms">Leave room</button><p class="muted">Voice and chat are simulated; no audio is transmitted.</p></div></section>
-</main></div>
-<nav class="mobile"><button data-go="home">⌂<br>Home</button><button data-go="rooms">🎙<br>Rooms</button><button data-go="messages">✉<br>Chats</button><button data-go="ranking">🏆<br>Rank</button><button data-go="profile">👤<br>Me</button></nav>
-<div class="modal" id="createModal"><div class="panel"><button style="float:right" data-close="createModal">✕</button><h2>Create a room</h2><label>Room name</label><input id="newName" placeholder="My awesome room"><label>Category</label><select id="newType"><option>Chat</option><option>Music</option><option>Gaming</option><option>Chill</option></select><button class="btn" id="createConfirm">Create room</button></div></div>
-<div class="modal" id="editModal"><div class="panel"><button style="float:right" data-close="editModal">✕</button><h2>Edit profile</h2><input id="nameInput" placeholder="Display name"><input id="bioInput" placeholder="About me"><button class="btn" id="saveProfile">Save</button></div></div>
-<div id="toast"></div>
-<script>
-const $=id=>document.getElementById(id);let coins=2500,rooms=[{name:"Midnight Music",type:"Music",emoji:"🎵",host:"Luna",users:24},{name:"Late Night Talks",type:"Chat",emoji:"🌙",host:"Alex",users:18},{name:"Gaming Lounge",type:"Gaming",emoji:"🎮",host:"Nova",users:32},{name:"Chill Zone",type:"Chill",emoji:"☁️",host:"Mia",users:12}];
-const gifts=[["🌹","Rose",100],["💎","Diamond",500],["👑","Crown",1000],["🧸","Teddy",250],["🚀","Rocket",750],["💜","Heart",150]];
-function esc(s){return String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
-function toast(s){let t=$("toast");t.textContent=s;t.style.display="block";clearTimeout(window.tt);window.tt=setTimeout(()=>t.style.display="none",2200)}
-function go(p){document.querySelectorAll(".page").forEach(x=>x.classList.remove("active"));$(p).classList.add("active");document.querySelectorAll(".nav").forEach(x=>x.classList.toggle("active",x.dataset.page===p))}
-document.querySelectorAll("[data-page]").forEach(b=>b.onclick=()=>go(b.dataset.page));document.querySelectorAll("[data-go]").forEach(b=>b.onclick=()=>go(b.dataset.go));
-function card(r){return `<article class="room"><div class="roomtop"><div class="emoji">${r.emoji} <span class="tag" style="float:right">● LIVE</span></div><h3>${esc(r.name)}</h3><small class="muted">${esc(r.type)} · Hosted by ${esc(r.host)}</small></div><div class="roombottom"><small class="muted">👥 ${r.users} listening</small><button class="btn join" data-name="${esc(r.name)}">Join →</button></div></article>`}
-function render(){let cards=rooms.map(card).join("");$("homeRooms").innerHTML=cards;$("roomList").innerHTML=rooms.filter(r=>r.name.toLowerCase().includes($("search").value.toLowerCase())).map(card).join("")||"No rooms found";$("count").textContent=rooms.length;document.querySelectorAll(".join").forEach(b=>b.onclick=()=>join(b.dataset.name))}
-function join(n){let r=rooms.find(x=>x.name===n);$("roomTitle").textContent=r.name;$("roomEmoji").textContent=r.emoji;$("host").textContent="Hosted by "+r.host;$("chatLog").textContent=r.host+": Welcome everyone! ✨";go("room")}
-$("createOpen").onclick=$("createOpen2").onclick=()=>$("createModal").classList.add("show");document.querySelectorAll("[data-close]").forEach(b=>b.onclick=()=>$ (b.dataset.close).classList.remove("show"));
-$("createConfirm").onclick=()=>{let n=$("newName").value.trim(),t=$("newType").value;if(!n)return toast("Enter a room name");rooms.unshift({name:n,type:t,emoji:{Chat:"💬",Music:"🎵",Gaming:"🎮",Chill:"🌙"}[t],host:"Midnight User",users:1});$("newName").value="";$("createModal").classList.remove("show");render();join(n);toast("Demo room created!")};
-$("search").oninput=render;$("editOpen").onclick=()=>{$("nameInput").value=$("profileName").textContent;$("bioInput").value=$("bio").textContent;$("editModal").classList.add("show")};$("saveProfile").onclick=()=>{if(!$("nameInput").value.trim())return toast("Enter a name");$("profileName").textContent=$("nameInput").value.trim();$("bio").textContent=$("bioInput").value;$("editModal").classList.remove("show");toast("Profile updated")};
-function update(){ $("coins").textContent=coins.toLocaleString();$("coinStat").textContent=(coins/1000).toFixed(1)+"K";$("giftCoins").textContent=coins.toLocaleString()}
-$("giftGrid").innerHTML=gifts.map(g=>`<button class="gift" data-cost="${g[2]}" data-gift="${g[0]}"><div style="font-size:30px">${g[0]}</div>${g[1]}<br><small class="muted">🪙 ${g[2]}</small></button>`).join("");$("giftGrid").onclick=e=>{let b=e.target.closest("[data-cost]");if(!b)return;let c=+b.dataset.cost;if(coins<c)return toast("Not enough demo coins");coins-=c;update();toast(b.dataset.gift+" gift sent!")};
-$("ranks").innerHTML=[["🥇","Luna","125,000 XP"],["🥈","Alex","98,400 XP"],["🥉","Nova","87,200 XP"],["4","Mia","64,100 XP"],["5","Midnight User","42,500 XP"]].map(r=>`<p style="padding:12px;border-bottom:1px solid var(--line)">${r[0]} &nbsp; <b>${r[1]}</b><span class="muted" style="float:right">${r[2]}</span></p>`).join("");
-$("send").onclick=()=>{let v=$("chatInput").value.trim();if(!v)return;let p=document.createElement("p");p.textContent="You: "+v;$("chatLog").appendChild(p);$("chatInput").value=""};$("chatInput").onkeydown=e=>{if(e.key==="Enter")$("send").click()};
-let mic=true;$("mic").onclick=()=>{mic=!mic;$("mic").textContent=mic?"🎙 Mic off":"🎙 Mic on";toast("Microphone control is only a demo")};$("like").onclick=()=>toast("💜 You liked this room!");render();update();
-</script>
-</body></html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#09090f" />
+    <title>Midnight World — Live Rooms</title>
+  </head>
+  <body>
+    <div id="app"></div>
+    <script type="module" src="/client/main.js"></script>
+  </body>
+</html>
